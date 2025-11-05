@@ -1,3 +1,4 @@
+# cd met pwd en ls in de nieuwe directory
 function nav
 	cd $argv
 	echo ""
