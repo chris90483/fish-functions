@@ -7,6 +7,6 @@ Deze opslaan in `~/.config/fish/config.fish`
 if status is-interactive
     # Commands to run in interactive sessions can go here
     neofetch
-    bind --preset \t forward-char 
+    bind \t forward-char 
 end
 ```
