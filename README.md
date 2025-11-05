@@ -5,8 +5,10 @@ klonen naar `~/.config/fish/functions`
 Deze opslaan in `~/.config/fish/config.fish`
 ```
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    # System info
     neofetch
+
+    # always tab to autocomplete
     bind \t forward-char 
 end
 ```
