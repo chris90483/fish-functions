@@ -12,7 +12,7 @@ if status is-interactive
     bind \t forward-char 
 end
 ```
-## lijst van functies, moet beschrijving
+## lijst van functies, met beschrijving
 ```
 funcs
 ```
