@@ -2,7 +2,7 @@
 klonen naar `~/.config/fish/functions`. De `.fish` bestanden moeten in deze directory staan, niet in een child directory.
 
 ## config
-Deze opslaan in `~/.config/fish/config.fish`
+Deze opslaan als `~/.config/fish/config.fish`
 ```
 if status is-interactive
     # System info
