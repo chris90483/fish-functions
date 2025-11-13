@@ -1,6 +1,13 @@
-# selecteer een repo uit ~/repos
+# selecteer een repo uit ~/repos (met optioneel argument voor snelle selectie)
 function repo
 	cd ~/repos
-	cd "./$(ls | fzf)"
+	set -l target
+	if test (count $argv) -gt 0
+		set target (ls | fzf --query="$argv[1]" --select-1)
+	else
+		set target (ls | fzf)
+	end
+
+	cd "$target"
 end
 
