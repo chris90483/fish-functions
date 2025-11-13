@@ -1,4 +1,5 @@
-# start rider op <pad>
+# start rider vanuit een repo (zie repo functie)
 function rider
-  ~/Jetbrains_Rider/bin/rider "$argv" > /dev/null 2> /dev/null &
+  repo $argv
+  ~/Jetbrains_Rider/bin/rider . > /dev/null 2> /dev/null &
 end

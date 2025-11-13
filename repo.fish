@@ -8,6 +8,8 @@ function repo
 		set target (ls | fzf)
 	end
 
-	cd "$target"
+	if test -n "$target"
+		cd "$target"
+	end
 end
 
