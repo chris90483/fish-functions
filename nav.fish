@@ -1,6 +1,8 @@
 # cd met pwd en ls in de nieuwe directory
 function nav
-	cd $argv
+	if test (count $argv) -gt 0
+        	cd $argv
+	end
 	echo ""
 	pwd
 	printf '%*s' "$(tput cols)" '' | tr ' ' '='
