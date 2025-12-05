@@ -1,4 +1,4 @@
-# cd met pwd en uitgebreide ls in de nieuwe directory
+# cd met pwd ls in de nieuwe directory
 function nav
 	if test (count $argv) -gt 0
         	cd $argv
