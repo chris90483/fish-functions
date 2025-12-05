@@ -14,14 +14,15 @@ function start_web
 	end
 	
 	if test -f .env.development
-		set -l commented_localhost_lines (grep -E '^#.*localhost:' .env.development)
-		if test -n "$commented_localhost_lines"
+		set commented_localhost_lines (grep -E '^#.*localhost:' .env.development)
+		while test -n "$commented_localhost_lines"
 			echo ".env.development check: er zijn nog localhost urls die uitgecomment staan:"
 			for line in $commented_localhost_lines
 				echo ">  $line"
 			end
 			
 			gedit .env.development
+			set commented_localhost_lines (grep -E '^#.*localhost:' .env.development)
 		end
 	end
 
