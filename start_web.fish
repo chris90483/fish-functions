@@ -1,4 +1,4 @@
-# start een frontend, met wat checks en setupjes ervoor (optionele parameter voor app, bijv hrm of fleet) 
+# todo: verplaatsen naar dev repo. Start een frontend, met wat checks en setupjes ervoor (optionele parameter voor app, bijv hrm of fleet) 
 function start_web
 	set -l old_location (pwd)
 	if test (count $argv) -gt 0

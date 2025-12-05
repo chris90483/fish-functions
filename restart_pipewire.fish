@@ -1,4 +1,4 @@
-# POTENTIAL FIX voor audio cracking probleem. systemctl --user restart voor pipewire, wireplumer en pipewire-pulse. meer info: funcsource 
+# POTENTIAL FIX voor audio cracking probleem. Zie funcsource
 
 # WAT IS DIT?
 # Pipewire is een "Sound Server" op linux die als proxy dient tussen processen en de driver van de geluidskaart.
