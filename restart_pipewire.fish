@@ -1,4 +1,4 @@
-# POTENTIAL FIX voor audio cracking probleem. systemctl --user restart voor pipewire, wireplumer en pipewire-pulse. meer info: funcsource 
+# POTENTIAL FIX voor audio cracking probleem. systemctl --user restart voor pipewire, wireplumer en pipewire-pulse. meer info: funcsource restart_pipewire
 
 # WAT IS DIT?
 # Pipewire is een "Sound Server" op linux die als proxy dient tussen processen en de driver van de geluidskaart.
@@ -25,10 +25,27 @@
 # Apps praten dus "tegen PulseAudio", maar PipeWire handelt het geluid echt af.
 # Daarom toont 'pactl info' bijvoorbeeld: "PulseAudio (on PipeWire 1.0.5)".
 
-function restart_pipewire
-    echo "Restarting PipeWire services..."
+function restart_pipewire    
+    echo "systemctl --user restart pipewire"
     systemctl --user restart pipewire
+    echo " - - done."
+    
+    echo "systemctl --user restart wireplumber"
     systemctl --user restart wireplumber
+    echo " - - done."
+    
     systemctl --user restart pipewire-pulse
-    echo "Done."
+    echo "systemctl --user restart pipewire-pulse"
+    echo " - - done."
+        
+    # Check of Spotify draait (PID > 0)
+    #set spotify_pid (pgrep spotify)
+
+    #if test -n "$spotify_pid"
+    #    echo "Spotify is running (PID: $spotify_pid). Recreating.."
+    #    echo "pkill -f spotify"
+    #    pkill -f spotify
+    #    nohup spotify %U &
+    #end
+    
 end
