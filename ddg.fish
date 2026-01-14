@@ -1,4 +1,4 @@
 # zoek op duckduckgo naar een zoekterm (spaties toegestaan)
 function ddg
-    open 'https://duckduckgo.com/?q='(echo $argv | string replace --all ' ' '%20')
+    open 'https://duckduckgo.com/?q='(echo $argv | string replace --all ' ' '%20') 1>/dev/null 2>/dev/null
 end
