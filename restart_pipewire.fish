@@ -38,14 +38,11 @@ function restart_pipewire
     echo "systemctl --user restart pipewire-pulse"
     echo " - - done."
         
-    # Check of Spotify draait (PID > 0)
-    #set spotify_pid (pgrep spotify)
-
-    #if test -n "$spotify_pid"
-    #    echo "Spotify is running (PID: $spotify_pid). Recreating.."
-    #    echo "pkill -f spotify"
-    #    pkill -f spotify
-    #    nohup spotify %U &
-    #end
+    if pgrep spotify >/dev/null
+        echo "Spotify is running. Recreating.."
+        pkill -f spotify
+        sleep 3
+        nohup spotify %U &
+    end
     
 end
