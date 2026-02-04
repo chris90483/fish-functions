@@ -1,17 +1,39 @@
-# wizard voor git add, status, commit, push
+# wizard voor git pull, status, add, commit, push
 function push
     set -l GREEN '\033[0;32m'
     set -l NC '\033[0m' # No Color
-
+    
+    echo -e "$GREEN====== SYNC MET REMOTE ======$NC" 
     set -l branch (git branch --show-current)
     echo "Branch: $branch"
-    echo -e "$GREEN====== GIT PULL ======$NC"
-    if not git pull
-        echo "Nonzero exit status na git pull, script stopt."
+    
+    if not git fetch
+        echo "Git fetch mislukt. script stopt."
         return 1
     end
 
+    if git ls-remote --exit-code --heads origin $branch >/dev/null 2>&1
+        # De remote branch bestaat. Laten we de hashes vergelijken.
+        set -l local_hash (git rev-parse HEAD)
+        set -l remote_hash (git rev-parse origin/$branch)
+        set -l merge_base (git merge-base HEAD origin/$branch)
 
+        if test "$local_hash" = "$remote_hash"
+            echo "Branch is up-to-date met 'origin/$branch'."
+        else if test "$merge_base" = "$remote_hash"
+            echo "Lokale branch loopt voor op 'origin/$branch'. Klaar om te pushen."
+        else
+            echo -e ""
+            echo -e "$GREEN====== GIT PULL ======$NC"
+            if not git pull
+                echo "Nonzero exit status na git pull, script stopt."
+                return 1
+            end
+        end
+    else
+        echo "Remote branch 'origin/$branch' bestaat nog niet en zal worden aangemaakt."
+    end
+    
     set -l branch_splitted (string split '-' -- $branch)    
     if test (count $branch_splitted) -ge 3
         set commit_branch_label (string join '-' $branch_splitted[1..2])
