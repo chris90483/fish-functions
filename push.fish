@@ -3,8 +3,14 @@ function push
     set -l GREEN '\033[0;32m'
     set -l NC '\033[0m' # No Color
     
-    echo -e "$GREEN====== SYNC MET REMOTE ======$NC" 
     set -l branch (git branch --show-current)
+    
+    if test "$status" != "0"
+    	echo "Branch kan niet worden bepaald. Script stopt."
+    	return 1
+    end
+    
+    echo -e "$GREEN====== SYNC MET REMOTE ======$NC" 
     echo "Branch: $branch"
     
     if not git fetch

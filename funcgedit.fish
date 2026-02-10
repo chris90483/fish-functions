@@ -7,7 +7,7 @@ function funcgedit
 
     set -l func_path "$HOME/.config/fish/functions/$argv[1].fish"    
     if not test -e "$func_path" 
-        echo -e "#\nfunction $argv[1]\n\nend" > $func_path
+        echo -e "# Deze functie heeft nog geen beschrijving.\nfunction $argv[1]\n\nend" > $func_path
     end
     
     gedit "$func_path"
