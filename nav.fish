@@ -1,7 +1,9 @@
 # cd met pwd ls in de nieuwe directory
 function nav
 	if test (count $argv) -gt 0
-        	cd $argv
+        	if not cd $argv
+        	    cd (ls -d -- */ | fzf --query "$argv" --select-1)
+    	    end
 	end
 	echo ""
 	pwd
