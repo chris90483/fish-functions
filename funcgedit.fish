@@ -10,10 +10,11 @@ function funcgedit
         echo -e "# Deze functie heeft nog geen beschrijving.\nfunction $argv[1]\n\nend" > $func_path
     end
     
+    set -l default_content_checksum (md5sum $func_path)    
     gedit "$func_path"
-    
-    set -l saved_contents (cat "$func_path")    
-    if test "$saved_contents" = "# function $argv[1]  end"
+    set -l saved_content_checksum (md5sum $func_path)
+        
+    if test "$saved_content_checksum" = "$default_content_checksum"
         rm "$func_path"
         echo "Lege functie $argv[1] is verwijderd."
     end
