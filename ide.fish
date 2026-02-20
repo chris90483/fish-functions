@@ -11,6 +11,7 @@ function ide
 		repo $argv
 	end
 	$CONFIG_FISH_IDE . > /dev/null 2> /dev/null &
+	disown
 end
 
 

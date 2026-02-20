@@ -5,11 +5,12 @@ klonen naar `~/.config/fish/functions`. De `.fish` bestanden moeten in deze dire
 Deze opslaan als `~/.config/fish/config.fish`
 ```
 if status is-interactive
-    # System info
-    neofetch
-
-    # always tab to autocomplete
-    bind \t forward-char 
+    # Commands to run in interactive sessions can go here
+    fastfetch
+    now
+    bind \t forward-char
+    
+    set CONFIG_FISH_IDE rider # of vscodium, visual studio etc
 end
 ```
 ## lijst van functies, met beschrijving
