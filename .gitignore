@@ -1,6 +1,10 @@
 .idea
+
+# dev repo
 start_apis.fish
+start_web.fish
 pull_test_dbs.fish
+
+# local stuff
 rel.fish
 vpn.fish
-

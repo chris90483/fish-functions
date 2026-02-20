@@ -8,14 +8,18 @@ function funcgedit
     set -l func_path "$HOME/.config/fish/functions/$argv[1].fish"    
     if not test -e "$func_path" 
         echo -e "# Deze functie heeft nog geen beschrijving.\nfunction $argv[1]\n\nend" > $func_path
+        set default_content_checksum (md5sum $func_path)
+    else
+        # function already existed, disable delete behavior.
+        set default_content_checksum 0
     end
-    
-    set -l default_content_checksum (md5sum $func_path)    
+            
     gedit "$func_path"
     set -l saved_content_checksum (md5sum $func_path)
         
     if test "$saved_content_checksum" = "$default_content_checksum"
         rm "$func_path"
-        echo "Lege functie $argv[1] is verwijderd."
+        echo "Template $argv[1] is verwijderd."
     end
 end
+

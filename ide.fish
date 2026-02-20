@@ -13,3 +13,4 @@ function ide
 	$CONFIG_FISH_IDE . > /dev/null 2> /dev/null &
 end
 
+
