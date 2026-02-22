@@ -8,3 +8,4 @@ pull_test_dbs.fish
 # local stuff
 rel.fish
 vpn.fish
+cmmv.fish

@@ -1,4 +1,4 @@
-# (cd) naar een (d)rive
+# (cd) naar een (d)rive (met --quiet voor geen echo)
 function cdd
 	set -l lines (lsblk -nrpo LABEL,NAME,SIZE,MOUNTPOINT)
 	for line in $lines;
@@ -29,7 +29,10 @@ function cdd
 		set -l parts (string split '|' $selected)
 		set -l label (echo "$parts[1]" | string trim)
 		set -l mountpoint (echo "$parts[4]" | string trim)
-		echo "cd naar $label op $mountpoint"
+		
 		cd $mountpoint
+		if test (count $argv) -le 1
+			nav .
+		end	
 	end 
 end
