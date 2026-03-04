@@ -5,7 +5,7 @@ function mktopics
     set TOPIC_FILE $argv[1]
 
     if not test -f "$TOPIC_FILE"
-        echo "Usage: mktopics.fish <./pad/naar/topics.txt>"
+        echo "Usage: mktopics <./pad/naar/topics.txt>"
         return 1
     end
 
