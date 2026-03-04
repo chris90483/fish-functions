@@ -1,4 +1,4 @@
-# alias van clear.
+# alias van clear
 function cls
 	clear;
 end

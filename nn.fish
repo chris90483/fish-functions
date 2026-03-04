@@ -1,4 +1,4 @@
-# nano -l <filename>
+# alias van nano -l <filename>
 function nn
 	if test -z $argv[1]:
 		echo "usage: nn <filename>"
