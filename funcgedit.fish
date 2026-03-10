@@ -5,9 +5,11 @@ function funcgedit
         return 1
     end
 
-    set -l func_path "$HOME/.config/fish/functions/$argv[1].fish"    
+    set funcname (string replace -r '\.fish$' '' -- $argv[1])
+
+    set -l func_path "$HOME/.config/fish/functions/$funcname.fish"    
     if not test -e "$func_path" 
-        echo -e "# Deze functie heeft nog geen beschrijving.\nfunction $argv[1]\n\nend" > $func_path
+        echo -e "# Deze functie heeft nog geen beschrijving.\nfunction $funcname\n\nend" > $func_path
         set default_content_checksum (md5sum $func_path)
     else
         # function already existed, disable delete behavior.
