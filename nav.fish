@@ -5,27 +5,35 @@ function nav
     set -l NC '\033[0m' # No Color
     set -l CYAN '\033[0;36m'
 
+    # determine location
 	if test (count $argv) -gt 0
-        	if not cd $argv
-        	    cd (ls -d -- */ | fzf --query "$argv" --select-1)
+    	if not cd $argv
+    	    if not set -l selected_loc (ls -d -- */ | fzf --query "$argv" --select-1)
+	            return 1
+            end
+            
+    	    if not cd $selected_loc
+    	        return 1
     	    end
+	    end
 	end
 	echo ""
 
+	######################
+	# wd
+    # determine if we are on root disk
 	set rootdev (df -P / | tail -1 | awk '{print $1}')
 	set curdev  (df -P $PWD | tail -1 | awk '{print $1}')
 	
-	######################
-	# wd
 	if test "$curdev" = "$rootdev"
 		pwd
 	else
-	set -l device (df -P $PWD | tail -1 | awk '{print $1}')
-	set -l label (lsblk -no LABEL $device 2>/dev/null)
-	set -l mountpoint (lsblk -no MOUNTPOINT $device 2>/dev/null)
-	set -l drive_wd (string replace -r "^$mountpoint" "" (pwd))
+	    set -l device (df -P $PWD | tail -1 | awk '{print $1}')
+	    set -l label (lsblk -no LABEL $device 2>/dev/null)
+	    set -l mountpoint (lsblk -no MOUNTPOINT $device 2>/dev/null)
+	    set -l drive_wd (string replace -r "^$mountpoint" "" (pwd))
 
-	echo -e "$CYAN\133$label\135$NC$drive_wd"
+	    echo -e "$CYAN\133$label\135$NC$drive_wd"
 	end
 	
 	######################
