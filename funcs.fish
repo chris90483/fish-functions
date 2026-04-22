@@ -15,14 +15,18 @@ function funcs
         set -l name (basename $f .fish)
         set -l comment (awk '/^#/ {print; exit}' $f)
         set -l comment_parts (printf "%s\n" $comment | fold -s -w $comment_width)
-        if not string match --quiet "# alias*" $comment
+        
+        if not string match --quiet "# alias*" $comment;
+        and not string match --quiet "func*" $name;
+        and not string match --quiet "fish_prompt*" $name;
+        and not string match --quiet "configgedit*" $name
             printf "%s\t" $name
             echo -e "$GRAY$comment_parts[1]$NC"
             set -l blank (string repeat -n (string length $name) " ")
             set -l i 2
             for part in $comment_parts[2..-1]
-            printf "%s\t" $blank
-            echo -e "$GRAY  $part$NC"
+                printf "%s\t" $blank
+                echo -e "$GRAY  $part$NC"
             end
         end
     end | column -t -s \t
@@ -38,25 +42,27 @@ function funcs
             set -l blank (string repeat -n (string length $name) " ")
             set -l i 2
             for part in $comment_parts[2..-1]
-            printf "%s\t" $blank
-            echo -e "$GRAY  $part$NC"
+                printf "%s\t" $blank
+                echo -e "$GRAY  $part$NC"
             end
         end
     end | column -t -s \t
     echo ""
-    echo -e "$GREEN$(printf "%s" "Functiebeheer")$NC"
+    echo -e "$GREEN$(printf "%s" "Beheer Fish shell")$NC"
     for f in $all_funcs   
         set -l name (basename $f .fish)
         set -l comment (awk '/^#/ {print; exit}' $f)
         set -l comment_parts (printf "%s\n" $comment | fold -s -w $comment_width)
-        if string match --quiet "func*" $name
+        if string match --quiet "func*" $name;
+        or string match --quiet "fish_prompt*" $name;
+        or string match --quiet "configgedit*" $name
             printf "%s\t" $name
             echo -e "$GRAY$comment_parts[1]$NC"
             set -l blank (string repeat -n (string length $name) " ")
             set -l i 2
             for part in $comment_parts[2..-1]
-            printf "%s\t" $blank
-            echo -e "$GRAY  $part$NC"
+                printf "%s\t" $blank
+                echo -e "$GRAY  $part$NC"
             end
         end
     end | column -t -s \t
