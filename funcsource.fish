@@ -1,7 +1,7 @@
-# print de implementatie van de costum fish functie
+# print de implementatie van de costum fish functie (funcsource <name> [catcmd])
 function funcsource
     if test (count $argv) -lt 1
-        echo "Gebruik: funcsource <functienaam> (bijv. funcsource nav voor functie nav.fish)"
+        echo "Gebruik: funcsource <functienaam> [catcmd] (bijv. funcsource nav voor functie nav.fish)"
         return 1
     end
     
