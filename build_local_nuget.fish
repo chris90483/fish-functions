@@ -29,8 +29,5 @@ function build_local_nuget
     echo
     echo -e -n "$GREEN"
     echo -e "copied $package to $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE $NC"
-    echo
-    
-    dotnet nuget locals all --clear
 end
 
