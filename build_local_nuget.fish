@@ -1,5 +1,8 @@
 # Build NuGet library, add to $NUGET_LOCAL_PACKAGE_SOURCE (use configgedit)
 function build_local_nuget
+    set -l GREEN '\033[0;32m'
+    set -l NC '\033[0m' # No Color
+
     if not dotnet pack -c Release
         return 1
     end
@@ -23,6 +26,11 @@ function build_local_nuget
     end
     
     cp $package $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE
-    echo "copied $package to $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE"
+    echo
+    echo -e -n "$GREEN"
+    echo -e "copied $package to $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE $NC"
+    echo
+    
+    dotnet nuget locals all --clear
 end
 
