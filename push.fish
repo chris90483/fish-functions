@@ -10,6 +10,19 @@ function push
     	return 1
     end
     
+    if test "$branch" = "master"
+        echo "Huidige branch is master, stash, nieuwe branch, pop?"
+        read -P "(Y/n):" user_mk_new_branch
+        if test -z "$user_mk_new_branch" -o "$user_mk_new_branch" = "y" -o "$user_mk_new_branch" = "Y" 
+            if not read -P "Issue nr: " user_issue_nr
+                return 1
+            end
+            git stash
+            branch_new $user_issue_nr
+            git stash pop
+        end
+    end
+    
     echo -e "$GREEN====== SYNC MET REMOTE ======$NC" 
     echo "Branch: $branch"
     
