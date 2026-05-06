@@ -1,5 +1,5 @@
 # Voeg een [Desktop Entry] toe aan ~/.local/share/applications
-function make_desktop_entry
+function desktop_entry_create
 	set -l GRAY '\033[0;90m'	
 	set -l NC '\033[0m' # No Color
 
