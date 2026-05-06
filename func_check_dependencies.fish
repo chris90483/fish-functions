@@ -50,9 +50,6 @@ function func_check_dependencies
             
             set -l exe_which (which -- $trimmed)
             set -l exe_source (dpkg -S $exe_which 2>/dev/null)
-            if string match --quiet "*coreutils*" $exe_source
-                continue
-            end
             
             if not test -z $exe_which
                 if not test -z $exe_source

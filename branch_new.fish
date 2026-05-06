@@ -1,5 +1,11 @@
 # Maak een nieuwe branch aan volgens Oegema's conventies
 function branch_new
+    
+    if test -z $CONFIG_GIT_BRANCH_PREFIX
+        echo "Configureer eerst CONFIG_GIT_BRANCH_PREFIX (gebruik configgedit)"
+        return 1
+    end
+
     if not git rev-parse --is-inside-work-tree > /dev/null 2>&1
         echo "$(pwd) is geen git repository."
         return 1
@@ -30,6 +36,6 @@ function branch_new
     git fetch --prune
     git checkout master
     git pull
-    set -l branch_name "$target_category/OGDPSD-$argv[1]-$description"
+    set -l branch_name "$target_category/$CONFIG_GIT_BRANCH_PREFIX-$argv[1]-$description"
     git checkout -b "$branch_name"
 end

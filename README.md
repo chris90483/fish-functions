@@ -35,7 +35,10 @@ if status is-interactive
     # executable voor de \`ide\` functie.
     set CONFIG_FISH_IDE rider
     
-    # pad om lokaal gebouwde NuGet packages in te zetten.
+    # pad om lokaal gebouwde NuGet packages in te zetten (\`build_local_nuget\`).
     set CONFIG_NUGET_LOCAL_PACKAGE_SOURCE ~/NugetLocalPackages
+    
+    # Prefix voor git branches (\`branch_new\` functie). Bijv prefix `MijnProject` --> feature/MijnProject-1234-fix-problemen
+    set CONFIG_GIT_BRANCH_PREFIX MijnProject
 end
 ```
