@@ -1,5 +1,5 @@
 # fish-functions
-Gepersonaliseerde functies voor de fish shel.
+Gepersonaliseerde functies voor de fish shell.
 
 ## Installatie
 - klonen naar `~/.config/fish/functions`. De `.fish` bestanden moeten in deze directory staan, niet in een child directory.
