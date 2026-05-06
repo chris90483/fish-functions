@@ -1,18 +1,31 @@
 # fish-functions
-klonen naar `~/.config/fish/functions`. De `.fish` bestanden moeten in deze directory staan, niet in een child directory.
+Gepersonaliseerde functies voor de fish shel.
 
-## config
-Deze opslaan als `~/.config/fish/config.fish`
+## Installatie
+- klonen naar `~/.config/fish/functions`. De `.fish` bestanden moeten in deze directory staan, niet in een child directory.
+- Run `configgedit` en plak de config:
 ```
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    ##################
+    # greeter commands
     fastfetch
     now
+    
+    ##############################
+    # always autocomplete with tab
     bind \t forward-char
     
-    set CONFIG_FISH_IDE rider # of vscodium, visual studio etc
+    #######################
+    # Environment variables
+    
+    # executable voor de \`ide\` functie.
+    set CONFIG_FISH_IDE rider
+    
+    # pad om lokaal gebouwde NuGet packages in te zetten.
+    set CONFIG_NUGET_LOCAL_PACKAGE_SOURCE ~/NugetLocalPackages
 end
 ```
+
 ## lijst van functies, met beschrijving
 ```
 funcs
