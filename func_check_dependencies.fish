@@ -31,7 +31,8 @@ function func_check_dependencies
     ##########################
     
     echo -e -n "Dependencies aan het bepalen"
-    for f in ~/.config/fish/functions/*.fish
+    set all_files ~/.config/fish/functions/*.fish ~/.config/fish/config.fish
+    for f in $all_files
         echo -e -n "."
         set cmds (string match -r '^\s*([a-zA-Z0-9_-]+)' < $f)
         set splitted (string split '\S+' -- $cmds)
@@ -109,8 +110,20 @@ function func_check_dependencies
                 set seen_funcs $seen_funcs "$func"
             end
             
+            set seen_config 0
+            for seen_func in $seen_funcs
+                if test "$seen_func" = "config"
+                    set seen_config 1
+                end
+            end
+            if test "$seen_config" = "1"
+                set config_message "(staat in configuratiebestand \nfish shell, bekijk dit bestand met configgedit)."
+            else
+                set config_message ""
+            end
+            
             if test (count $seen_funcs) -gt 0
-                echo -e -n "$RED Nodig voor: $(string join ', ' $seen_funcs)$NC"
+                echo -e -n "$RED Nodig voor: $(string join ', ' $seen_funcs) $config_message$NC"
             end
             
             set missing_count (math $missing_count + 1)
