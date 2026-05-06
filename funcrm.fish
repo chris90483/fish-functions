@@ -17,6 +17,7 @@ function funcrm
 		echo -e -n "$argv[1] bestaat niet. Gebruik"
 		echo -e -n "$GREEN funcs $NC"
 		echo -e "voor een lijst van functies"
+		echo "Gekeken naar volledig pad: $func_path"
 		return 1
 	end
 end

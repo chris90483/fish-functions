@@ -14,7 +14,7 @@ function get_dep_funcs
 end
 
 # Geef een lijst met dependencies die in de functies worden gebruikt
-function func_list_dependencies
+function func_check_dependencies
     set -l RED "\033[0;31m"    
     set -l GREEN "\033[0;32m"
     set -l NC "\033[0m" # No Color
