@@ -1,4 +1,4 @@
-# Maak een nieuwe branch aan volgens Oegema's conventies
+# Maak een nieuwe git branch aan met categorie, issue nummer en beschrijving
 function branch_new
     
     if test -z $CONFIG_GIT_BRANCH_PREFIX
