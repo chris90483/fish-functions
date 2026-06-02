@@ -20,6 +20,7 @@ function push
             git stash
             branch_new $user_issue_nr
             git stash pop
+            set -l branch (git branch -- show-current)
         end
     end
     

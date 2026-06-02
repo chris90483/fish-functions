@@ -5,7 +5,7 @@ function desktop_entry_create
 
 
 	if test (count $argv) -ne 1
-		echo "Gebruik make_desktop_entry <filename>"
+		echo "Gebruik make_desktop_entry <name>"
 		return 1
 	end
 
