@@ -3,9 +3,9 @@ function desktop_entry_create
 	set -l GRAY '\033[0;90m'	
 	set -l NC '\033[0m' # No Color
 
-
 	if test (count $argv) -ne 1
-		echo "Gebruik make_desktop_entry <name>"
+
+		echo "Gebruik desktop_entry_create <displaynaam>"
 		return 1
 	end
 
