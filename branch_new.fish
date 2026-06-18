@@ -1,8 +1,8 @@
 # Maak een nieuwe git branch aan met categorie, issue nummer en beschrijving
 function branch_new
     
-    if test -z $CONFIG_GIT_BRANCH_PREFIX
-        echo "Configureer eerst CONFIG_GIT_BRANCH_PREFIX (gebruik configgedit)"
+    if test -z $CONFIG_FISH_GIT_BRANCH_PREFIX
+        echo "Configureer eerst CONFIG_FISH_GIT_BRANCH_PREFIX (gebruik configgedit)"
         return 1
     end
 
@@ -36,6 +36,6 @@ function branch_new
     git fetch --prune
     git checkout master
     git pull
-    set -l branch_name "$target_category/$CONFIG_GIT_BRANCH_PREFIX-$argv[1]-$description"
+    set -l branch_name "$target_category/$CONFIG_FISH_GIT_BRANCH_PREFIX-$argv[1]-$description"
     git checkout -b "$branch_name"
 end

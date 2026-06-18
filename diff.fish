@@ -8,19 +8,17 @@ function diff
         return 1
     end
 
-    git stash >/dev/null
+    git fetch >/dev/null
     or return 1
 
-    git pull >/dev/null
-    or return 1
-
-
-    set untracked_files (git ls-files --others --exclude-standard)
     set has_changes 0
 
     #################
     # TRACKED CHANGES
-    if git stash pop >/dev/null 2>&1
+    set upstream_diff (git diff --name-only @{upstream} --diff-filter=ACMRTUXB)
+    or return 1
+    set upstream_diff_len (count $upstream_diff)
+    if test "$upstream_diff_len" -gt "0"
         set has_changes 1
 
         # diffs (all but deleted files)
@@ -44,6 +42,7 @@ function diff
 
     #####################
     # UNTRACKED ADDITIONS
+    set untracked_files (git ls-files --others --exclude-standard)
     if test (count $untracked_files) -gt 0
         set has_changes 1
         for untracked_file in $untracked_files

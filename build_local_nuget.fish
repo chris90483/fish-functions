@@ -15,19 +15,19 @@ function build_local_nuget
         return 3
     end
     
-    if test -z $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE
-        echo "run configgedit and add CONFIG_NUGET_LOCAL_PACKAGE_SOURCE (path to local package source)"
+    if test -z $CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE
+        echo "run configgedit and add CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE (path to local package source)"
         return 4
     end
     
-    if not test -d $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE
-        echo "CONFIG_NUGET_LOCAL_PACKAGE_SOURCE is not an existing path.  run configgedit and modify."
+    if not test -d $CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE
+        echo "CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE is not an existing path.  run configgedit and modify."
         return 4
     end
     
-    cp $package $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE
+    cp $package $CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE
     echo
     echo -e -n "$GREEN"
-    echo -e "copied $package to $CONFIG_NUGET_LOCAL_PACKAGE_SOURCE $NC"
+    echo -e "copied $package to $CONFIG_FISH_NUGET_LOCAL_PACKAGE_SOURCE $NC"
 end
 
