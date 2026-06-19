@@ -1,10 +1,14 @@
 # list drives met LABEL, NAME, SIZE, MOUNTPOINT
 function lsd
+	set -l CYAN (printf '\e[0;36m')
+	set -l NC   (printf '\e[0m') # No Color
+
 	echo "Root"
 	df -h /
 	
 	echo ""
 	echo "Schijven"
+	set entries "LABEL | NAME | FSSIZE||FSUSED | FSUSE% | MOUNTPOINT"
 	set -l lines (lsblk -nrpo LABEL,NAME,FSSIZE,FSUSED,FSUSE%,MOUNTPOINT)
 	for line in $lines;
 		set -l parts (string split ' ' $line)
@@ -22,7 +26,7 @@ function lsd
 		        continue
 		    end
 
-		    set entries $entries "$label | $name | $used|/|$size|($used_perc) | $mountpoint"
+		    set entries $entries "$CYAN$label$NC | $name | $used|/|$size| ($used_perc) | $mountpoint"
 		end
 	end
 	
