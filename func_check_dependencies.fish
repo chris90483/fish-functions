@@ -30,7 +30,8 @@ function func_check_dependencies
     # DETERMINE DEPENDENCIES #
     ##########################
     
-    echo -e -n "Dependencies aan het bepalen"
+    echo -e "Dependencies aan het bepalen."
+    echo -e -n "Dit zal even duren."
     set all_files ~/.config/fish/functions/*.fish ~/.config/fish/config.fish
     for f in $all_files
         echo -e -n "."

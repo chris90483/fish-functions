@@ -23,5 +23,9 @@ function funcgedit
         rm "$func_path"
         echo "Template $argv[1] is verwijderd."
     end
+    
+    # refresh funcs list in the background
+    fish -c "funcs fresh;exit" >/dev/null &
+    disown
 end
 

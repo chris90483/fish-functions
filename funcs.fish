@@ -1,10 +1,35 @@
 # geef alle custom fish functions en een beschrijving
 function funcs
+    set -l CACHE_DIR ~/.config/fish/functions/.cache
+    set -l CACHED_OUTPUT_FILENAME funcs_cached.txt
+    mkdir -p $CACHE_DIR
+    
+    set should_run 0
+
+    if not find $CACHE_DIR/$CACHED_OUTPUT_FILENAME >/dev/null 2>&1
+        set should_run 1
+    end
+
+    if test "$argv[1]" = "fresh"
+    	set should_run 1
+    end
+    
+    if test "$should_run" -eq "0"
+    	#print cached version
+        cat $CACHE_DIR/$CACHED_OUTPUT_FILENAME
+    	return 0
+    end
+    
+    run | tee $CACHE_DIR/$CACHED_OUTPUT_FILENAME
+end
+
+function run
     set -l GREEN '\033[0;32m'
     set -l GRAY '\033[0;90m'
     set -l NC '\033[0m' # No Color
     set -l cols (tput cols)
     set -l max_name 0
+    
     for f in ~/.config/fish/functions/*.fish
         set -l n (string length (basename $f .fish))
         test $n -gt $max_name; and set max_name $n
@@ -67,4 +92,3 @@ function funcs
         end
     end | column -t -s \t
 end
-

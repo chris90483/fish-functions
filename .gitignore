@@ -6,6 +6,7 @@ start_web.fish
 pull_test_dbs.fish
 
 # local stuff
+.cache
 rel.fish
 vpn.fish
 cmmv.fish

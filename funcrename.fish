@@ -20,5 +20,9 @@ function funcrename
     
     mv $source $dest
     
-   awk -v old="$argv[1]" -v new="$argv[2]" '$1 == "function" && $2 == old { sub(old, new) } 1' $dest > /tmp/__funcrename_temp.fish && mv /tmp/__funcrename_temp.fish $dest 
+    awk -v old="$argv[1]" -v new="$argv[2]" '$1 == "function" && $2 == old { sub(old, new) } 1' $dest > /tmp/__funcrename_temp.fish && mv /tmp/__funcrename_temp.fish $dest
+   
+    # refresh funcs list in the background
+    fish -c "funcs fresh;exit" >/dev/null &
+    disown
 end

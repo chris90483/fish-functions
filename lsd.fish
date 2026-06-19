@@ -1,5 +1,10 @@
 # list drives met LABEL, NAME, SIZE, MOUNTPOINT
 function lsd
+	echo "Root"
+	df -h /
+	
+	echo ""
+	echo "Schijven"
 	set -l lines (lsblk -nrpo LABEL,NAME,FSSIZE,FSUSED,FSUSE%,MOUNTPOINT)
 	for line in $lines;
 		set -l parts (string split ' ' $line)

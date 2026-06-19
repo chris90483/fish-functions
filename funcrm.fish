@@ -13,6 +13,9 @@ function funcrm
 	if test -e "$func_path"
 		rm "$func_path"
 		echo "rm $func_path"
+		# refresh funcs list in the background
+		fish -c "funcs fresh;exit" >/dev/null &
+		disown
 	else
 		echo -e -n "$argv[1] bestaat niet. Gebruik"
 		echo -e -n "$GREEN funcs $NC"
