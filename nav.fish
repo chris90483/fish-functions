@@ -7,7 +7,7 @@ function nav
 
     # determine location
 	if test (count $argv) -gt 0
-    	if not cd $argv >/dev/null 2>1
+    	if not cd $argv >/dev/null 2>&1
     	    if not set -l selected_loc (ls -d -- */ | fzf --query "$argv" --select-1)
 	            return 1
             end
