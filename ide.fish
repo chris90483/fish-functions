@@ -11,7 +11,10 @@ function ide
 		repo $argv
 	end
 	$CONFIG_FISH_IDE . > /dev/null 2> /dev/null &
+	sleep 0.2
+	wmctrl -x -a (basename $CONFIG_FISH_IDE)
 	disown
 end
+
 
 
