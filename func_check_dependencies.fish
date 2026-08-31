@@ -17,6 +17,7 @@ end
 function func_check_dependencies
     set -l RED "\033[0;31m"    
     set -l GREEN "\033[0;32m"
+    set -l BLUE "\033[0;34m"
     set -l NC "\033[0m" # No Color
     # hack to prevent fish seeing the [ as an index operator
     set -l missing "$RED$(string unescape '\u005B')MISSEND]$NC"
@@ -68,6 +69,11 @@ function func_check_dependencies
             if string match --quiet -- "--*" $trimmed
                 # it's an option, not a command. Ignore it.
                 continue
+            end
+            
+            # it maybe a function name, check that.
+            if grep -qE "^[[:space:]]*function[[:space:]]+"$trimmed"[[:space:]]*\$" $f
+                continue            
             end
             
             # Found a missing dependency
@@ -138,4 +144,23 @@ function func_check_dependencies
     
     echo ""
     echo -e "$GREEN$satisfied_count$NC dependencies voldaan, $RED$missing_count$NC missende dependencies." 
+    
+    if test $missing_count -gt 0
+        echo ""
+        echo "Installeer de missende dependencies:"
+        echo -n -e "$BLUE"
+        echo -n -e "apti "
+        for entry in $missing_deps
+            set -l parts (string split \| -- $entry)
+            set -l dep $parts[1]
+            set non_unique_deps $non_unique_deps $dep     
+        end
+        set unique_deps (printf '%s\n' $non_unique_deps | sort -u)
+        for unique_dep in $unique_deps
+            echo -n -e "$unique_dep "     
+        end
+        
+        echo -e "$NC"
+        echo ""
+    end
 end
