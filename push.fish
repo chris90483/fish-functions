@@ -13,7 +13,7 @@ function push
     if test "$branch" = "master"
         echo "Huidige branch is master, stash, nieuwe branch, pop?"
         read -P "(Y/n):" user_mk_new_branch
-        if test -z "$user_mk_new_branch" -o "$user_mk_new_branch" = "y" -o "$user_mk_new_branch" = "Y" 
+        if test "$user_mk_new_branch" = "y" -o "$user_mk_new_branch" = "Y" 
             if not read -P "Issue nr: " user_issue_nr
                 return 1
             end
@@ -21,6 +21,10 @@ function push
             branch_new $user_issue_nr
             git stash pop
             set -l branch (git branch -- show-current)
+        end
+        if not test "$user_mk_new_branch" = "n"
+            echo "Geannuleerd."
+            return 0
         end
     end
     
@@ -68,7 +72,7 @@ function push
     read -P "(Y/n): " run_git_add
     if test "$status" != "0"
         echo "Geannuleerd."
-        return 1
+        return 0
     else if test -z "$run_git_add" -o "$run_git_add" = "y" -o "$run_git_add" = "Y"
         git add .
         echo ""
@@ -83,7 +87,7 @@ function push
     read -P "Commit message: " user_commit_message
     if test -z "$user_commit_message" -o "$status" != "0"
         echo "Geannuleerd."
-        return 1
+        return 0
     end
     
     

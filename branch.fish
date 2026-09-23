@@ -1,4 +1,4 @@
-# fetch branches, selecteer er een en pull (met optioneel argument voor snelle selectie)
+# fetch branches, selecteer er een (checkout), en pull (met optioneel argument voor snelle selectie)
 function branch
     if not git rev-parse --is-inside-work-tree > /dev/null 2>&1
         echo "$(pwd) is niet een git repository."
@@ -11,6 +11,28 @@ function branch
     set -l branch_list (git branch -r | sed 's/ *origin\///' | grep -v 'HEAD')
 
     if test (count $argv) -gt 0
+        if string match -q  "$argv[1]*" "main"
+            if contains "master" $branch_list
+                set target_branch master
+            else
+                set target_branch main
+            end
+            git checkout $target_branch
+            git pull
+            return 0;
+        end
+        
+        if string match -q  "$argv[1]*" "master"
+            if contains "main" $branch_list
+                set target_branch main
+            else
+                set target_branch master
+            end
+            git checkout $target_branch
+            git pull
+            return 0;
+        end
+        
         if test "$argv[1]" = "-"
             git checkout -
             git pull

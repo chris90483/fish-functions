@@ -10,6 +10,7 @@ function funcs
     if not find $CACHE_DIR/$CACHED_OUTPUT_FILENAME >/dev/null 2>&1
         set should_run 1
     else
+        # find function files with a later update timestamp than the cached output file
         set -l changed (find "$FUNCS_DIR" -maxdepth 1 -type f -newer "$CACHE_DIR/$CACHED_OUTPUT_FILENAME" -print -quit)
         if test -n "$changed"
             set should_run 1
