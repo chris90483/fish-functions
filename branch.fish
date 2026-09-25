@@ -11,7 +11,7 @@ function branch
     set -l branch_list (git branch -r | sed 's/ *origin\///' | grep -v 'HEAD')
 
     if test (count $argv) -gt 0
-        if string match -q  "$argv[1]*" "main"
+        if string match -q  -- "$argv[1]*" "main"
             if contains "master" $branch_list
                 set target_branch master
             else
@@ -22,7 +22,7 @@ function branch
             return 0;
         end
         
-        if string match -q  "$argv[1]*" "master"
+        if string match -q  -- "$argv[1]*" "master"
             if contains "main" $branch_list
                 set target_branch main
             else
